@@ -46,18 +46,14 @@ extension ViewControllerOne: CustomNativeAdLoaderDelegate {
         _ adLoader: AdLoader,
         didReceive customNativeAd: CustomNativeAd
     ) {
-
         print("✅ Custom Native loaded")
 
         let mediaContent = customNativeAd.mediaContent
-
         let aspectRatio = mediaContent.aspectRatio
 
         print("📐 Aspect Ratio:", aspectRatio)
 
         let width = view.bounds.width
-
-        // altura = largura / aspectRatio
         let height = width / CGFloat(aspectRatio)
 
         print("📏 Calculated height:", height)
@@ -91,10 +87,8 @@ extension ViewControllerOne: CustomNativeAdLoaderDelegate {
         ))
 
         mediaView.backgroundColor = .black
-
-        // AQUI
         mediaView.mediaContent = customNativeAd.mediaContent
-
+        
         view.addSubview(mediaView)
 
         customNativeAd.recordImpression()

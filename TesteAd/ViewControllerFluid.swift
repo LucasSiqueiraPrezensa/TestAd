@@ -84,7 +84,6 @@ extension ViewControllerFluid: AdSizeDelegate {
 }
 
 extension ViewControllerFluid: BannerViewDelegate {
-
     func bannerViewDidReceiveAd(_ bannerView: BannerView) {
         print("✅ Ad received")
     }

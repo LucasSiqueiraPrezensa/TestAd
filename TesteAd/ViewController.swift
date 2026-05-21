@@ -9,10 +9,7 @@ class ViewController: UIViewController {
     private var customAds: [CustomNativeAd] = []
 
     private lazy var carousel: UICollectionView = {
-
         let layout = UICollectionViewFlowLayout()
-
-        // 🔥 VERTICAL
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 0
 
@@ -65,10 +62,7 @@ class ViewController: UIViewController {
     // MARK: - Ads
 
     private func loadCustomNative() {
-
         let multipleAdsOptions = MultipleAdsAdLoaderOptions()
-
-        // quantidade de anúncios carregados
         multipleAdsOptions.numberOfAds = 5
 
         adLoader = AdLoader(
@@ -93,7 +87,6 @@ class ViewController: UIViewController {
 // MARK: - CustomNativeAdLoaderDelegate
 
 extension ViewController: CustomNativeAdLoaderDelegate {
-
     func customNativeAdFormatIDs(for adLoader: AdLoader) -> [String] {
         return ["12420626"]
     }
@@ -102,7 +95,6 @@ extension ViewController: CustomNativeAdLoaderDelegate {
         _ adLoader: AdLoader,
         didReceive customNativeAd: CustomNativeAd
     ) {
-
         print("✅ Custom Native loaded")
 
         customAds.append(customNativeAd)
@@ -114,7 +106,6 @@ extension ViewController: CustomNativeAdLoaderDelegate {
         _ adLoader: AdLoader,
         didFailToReceiveAdWithError error: Error
     ) {
-
         print("❌ ERROR:", error.localizedDescription)
     }
 }
@@ -122,7 +113,6 @@ extension ViewController: CustomNativeAdLoaderDelegate {
 // MARK: - UICollectionViewDataSource
 
 extension ViewController: UICollectionViewDataSource {
-
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -161,8 +151,6 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-
-        // 🔥 cada item ocupa a tela inteira
         return CGSize(
             width: collectionView.bounds.width,
             height: collectionView.bounds.height
@@ -173,13 +161,10 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - Cell
 
 final class AdCarouselCell: UICollectionViewCell {
-
     static let identifier = "AdCarouselCell"
-
+    
     private let mediaView: MediaView = {
-
         let view = MediaView()
-
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.contentMode = .scaleAspectFill
@@ -189,24 +174,18 @@ final class AdCarouselCell: UICollectionViewCell {
     }()
 
     private let gradientView: UIView = {
-
         let view = UIView()
-
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.black.withAlphaComponent(0.35)
-
         return view
     }()
 
     private let titleLabel: UILabel = {
-
         let label = UILabel()
-
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 22)
         label.numberOfLines = 2
-
         return label
     }()
 
@@ -214,13 +193,11 @@ final class AdCarouselCell: UICollectionViewCell {
         super.init(frame: frame)
 
         contentView.backgroundColor = .black
-
         contentView.addSubview(mediaView)
         contentView.addSubview(gradientView)
         contentView.addSubview(titleLabel)
 
         NSLayoutConstraint.activate([
-
             mediaView.topAnchor.constraint(equalTo: contentView.topAnchor),
             mediaView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             mediaView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -242,7 +219,6 @@ final class AdCarouselCell: UICollectionViewCell {
     }
 
     func configure(with ad: CustomNativeAd) {
-
         mediaView.mediaContent = ad.mediaContent
 
         // asset customizado

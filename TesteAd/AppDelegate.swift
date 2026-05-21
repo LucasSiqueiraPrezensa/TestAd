@@ -1,18 +1,12 @@
-//
-//  AppDelegate.swift
-//  TesteAd
-//
-//  Created by Prezensa on 21/05/26.
-//
-
 import UIKit
 import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
         MobileAds.shared.start()
+        
         return true
     }
 
