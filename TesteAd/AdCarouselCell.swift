@@ -71,35 +71,64 @@ final class AdCarouselCell: UICollectionViewCell {
     }
 
     // MARK: - Configure
-
+    
     func configure(with ad: CustomNativeAd) {
         let mediaContent = ad.mediaContent
 
-        guard mediaContent.hasVideoContent else {
-            isHidden = true
-            return
-        }
+        let hasVideo = mediaContent.hasVideoContent
+        let hasImage = mediaContent.mainImage != nil
 
-        isHidden = false
-        loadingView.startAnimating()
-
-        mediaView.mediaContent = mediaContent
-
-        if let title = ad.string(forKey: "Title") {
-            titleLabel.text = title
+        if hasVideo || hasImage {
+            loadingView.startAnimating()
+            mediaView.mediaContent = mediaContent
+            mediaView.isHidden = false
         } else {
-            titleLabel.text = "Publicidade"
+            mediaView.isHidden = true
         }
 
-        // loop
-        mediaContent.videoController.delegate = self
+        renderTitle(with: ad)
 
+        // Só faz autoplay/loop se houver vídeo
+        if hasVideo {
+            mediaContent.videoController.delegate = self
+        }
+        
         // remove loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             self.loadingView.stopAnimating()
         }
 
         ad.recordImpression()
+    }
+    
+    private func renderTitle(with ad: CustomNativeAd) {
+        let possibleTextKeys = [
+            "Title",
+            "Headline",
+            "title",
+            "headline",
+            "Body",
+            "body",
+            "Description",
+            "description",
+            "Subtitle",
+            "subtitle",
+            "CTA",
+            "CTA_TYPE",
+            "CallToAction",
+            "call_to_action"
+        ]
+        
+        for key in possibleTextKeys {
+            if let value = ad.string(forKey: key)?
+                .trimmingCharacters(in: .whitespacesAndNewlines),
+               !value.isEmpty {
+                titleLabel.text = value
+                return
+            }
+        }
+
+        titleLabel.text = "Publicidade"
     }
 }
 

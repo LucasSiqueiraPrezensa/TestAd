@@ -91,19 +91,18 @@ extension ViewController: CustomNativeAdLoaderDelegate {
     }
     
     func adLoader(_ adLoader: AdLoader, didReceive customNativeAd: CustomNativeAd) {
+        printDebugAd(customNativeAd)
+        
         let mediaContent = customNativeAd.mediaContent
+        let hasVideo = mediaContent.hasVideoContent
+        let hasImage = mediaContent.mainImage != nil && mediaContent.aspectRatio > 0
+        let hasRenderableMedia = hasVideo || hasImage
 
-        guard mediaContent.hasVideoContent else {
-            print("❌ Sem vídeo")
+        guard hasRenderableMedia else {
+            print("❌ Sem mídia renderizável")
             return
         }
 
-        guard mediaContent.mainImage != nil || mediaContent.aspectRatio > 0 else {
-            print("❌ Media inválida")
-            return
-        }
-
-        print("✅ Ad válido")
         customAds.append(customNativeAd)
 
         DispatchQueue.main.async {
@@ -113,6 +112,25 @@ extension ViewController: CustomNativeAdLoaderDelegate {
 
     func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
         print("❌ ERROR:", error.localizedDescription)
+    }
+    
+    private func printDebugAd(_ customNativeAd: CustomNativeAd) {
+        print("\n------ ASSETS ------")
+        for key in customNativeAd.availableAssetKeys {
+            if let value = customNativeAd.string(forKey: key) {
+                print("📝 \(key): \(value)")
+            } else if let image = customNativeAd.image(forKey: key) {
+                print("🖼️ \(key): \(image)")
+            } else {
+                print("📦 \(key): 🛠️")
+            }
+        }
+
+        let mediaContent = customNativeAd.mediaContent
+
+        print("\n🎥 hasVideoContent:", mediaContent.hasVideoContent)
+        print("📐 aspectRatio:", mediaContent.aspectRatio)
+        print("🖼️ mainImage:", mediaContent.mainImage as Any)
     }
 }
 
