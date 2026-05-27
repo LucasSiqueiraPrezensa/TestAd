@@ -1,8 +1,8 @@
 # AppTestGoogleAdManager-iOS 🚀
 
-Este projeto é uma **Prova de Conceito (PoC)** para demonstrar a integração do **Google Ad Manager** em um aplicativo iOS moderno, utilizando **UIKit** e o formato de **Custom Native Ads (Anúncios Nativos Personalizados)**.
+**Prova de Conceito (PoC)** para demonstrar a integração do **Google Ad Manager** em um aplicativo iOS, utilizando o formato de **Custom Native Ads (Anúncios Nativos Personalizados)**.
 
-O objetivo principal é validar a exibição do formato **Shortz** (vídeos curtos) integrados de forma fluida em um carrossel vertical com autoplay e loop contínuo.
+O objetivo é validar a exibição do formato **Shortz** (vídeos curtos) integrados de forma fluida em um carrossel vertical com autoplay e loop contínuo.
 
 ## 📱 Demo
 
@@ -13,7 +13,7 @@ https://github.com/user-attachments/assets/45d1626c-fc63-4d6e-9dd7-26082e0400cb
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias
 
 - **Swift**
 - **UIKit**
@@ -175,10 +175,8 @@ Responsável por:
 ## 🚀 Como Executar
 
 1. Clone o repositório.
-2. Instale as dependências do Google Mobile Ads SDK.
-3. Configure o projeto no Xcode.
-4. Utilize um dispositivo físico para testes de vídeo.
-5. Execute o aplicativo.
+2. Abra TesteAd.xcodeproj
+3. Execute o aplicativo (▶︎).
 
 ---
 
