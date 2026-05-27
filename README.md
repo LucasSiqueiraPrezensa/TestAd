@@ -8,9 +8,8 @@ O objetivo principal é validar a exibição do formato **Shortz** (vídeos curt
 
 | Shortz Video Integration |
 |--------------------------|
-| <video width="300" autoplay loop muted playsinline controls>
-  <source src="docs/shortz_demo.mp4" type="video/mp4">
-</video> |
+
+https://github.com/user-attachments/assets/45d1626c-fc63-4d6e-9dd7-26082e0400cb
 
 ---
 
