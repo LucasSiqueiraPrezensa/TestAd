@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCarousel()
-        loadCustomNative()
+        setupAd()
     }
 
     // MARK: - Setup
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
 
     // MARK: - Ads
 
-    private func loadCustomNative() {
+    private func setupAd() {
         let multipleAdsOptions = MultipleAdsAdLoaderOptions()
         multipleAdsOptions.numberOfAds = 5
         let videoOptions = VideoOptions()
@@ -103,6 +103,7 @@ extension ViewController: CustomNativeAdLoaderDelegate {
             return
         }
 
+        customNativeAd.delegate = self
         customAds.append(customNativeAd)
 
         DispatchQueue.main.async {
@@ -131,6 +132,16 @@ extension ViewController: CustomNativeAdLoaderDelegate {
         print("\n🎥 hasVideoContent:", mediaContent.hasVideoContent)
         print("📐 aspectRatio:", mediaContent.aspectRatio)
         print("🖼️ mainImage:", mediaContent.mainImage as Any)
+    }
+}
+
+extension ViewController: CustomNativeAdDelegate {
+    func customNativeAdDidRecordClick(_ customNativeAd: CustomNativeAd) {
+        print("🔥 AD CLICK")
+    }
+    
+    func customNativeAdDidRecordImpression(_ customNativeAd: CustomNativeAd) {
+        print("👀 IMPRESSION")
     }
 }
 
